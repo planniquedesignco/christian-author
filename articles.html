@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Articles — Grace & Truth</title><link rel="stylesheet" href="assets/styles.css"></head><body>
+<header class="site-header"><div class="container nav"><a class="brand" href="index.html">Grace & Truth<small>Christian reflections</small></a><nav class="nav-links"><a href="index.html">Home</a><a href="articles.html">Articles</a><a href="categories.html">Categories</a><a href="about.html">About</a></nav><button class="search-trigger">Search articles</button><button class="menu-btn" aria-label="Open menu" aria-expanded="false"><span></span></button></div></header>
+<section class="page-hero"><div class="container"><div class="kicker">The writing library</div><h1>Read & reflect</h1><p class="editorial-intro">Browse the complete collection, move through topics that matter to you, or search for a particular question, passage, or theme.</p><div class="filters" id="filters"></div><div style="margin-top:18px"><input id="search" class="search-field" placeholder="Search the writing..." aria-label="Search articles"></div></div></section>
+<section class="section"><div class="container"><div class="article-grid" id="grid"></div></div></section>
+<footer class="footer"><div class="container"><div class="copyright">© 2026 Your Client Name.</div></div></footer><script src="assets/site.js"></script><script>
+let cat='All';
+const grid=document.getElementById('grid'),search=document.getElementById('search'),filters=document.getElementById('filters');
+function draw(){const q=search.value.toLowerCase();renderArticleGrid(grid,getArticles().filter(a=>(cat==='All'||a.category===cat)&&(`${a.title} ${a.excerpt} ${a.category}`.toLowerCase().includes(q))))}
+function drawFilters(){const cats=getCategories();filters.innerHTML=`<button class="filter active" data-cat="All">All writing</button>${cats.map(c=>`<button class="filter" data-cat="${esc(c.name)}">${esc(c.name)}</button>`).join('')}`;filters.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{filters.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');cat=b.dataset.cat;draw()})}
+search.oninput=draw;drawFilters();draw();
+</script></body></html>
